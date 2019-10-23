@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<idoctype html>
+	<title>호박 때려잡기</title>
+	<style type="text/css">
+		body{width: 900px; height: 1420px; position: absolute; background: black;}
+		.aaa{position: absolute;}
+		.mmm{width: 700px; height: 700px; position: absolute; top: 10px; left: 280px;}
+		.aai{width: 400px; height: 400px; position: absolute; top: 1360px; left: 620px;}
+		.bbi{width: 300px; height: 300px; position: absolute; top: 1520px; left: 10px;}
+		.cci{width: 400px; height: 400px; position: absolute; top: 1420px; left: 850px;}
+		.pumpkin{width: 200px; height: 200px; background-repeat: no-repeat; animation: pp 8s linear;}
+
+			@keyframes pp{
+				0%{background-position: 0 300px; opacity: 0;}
+				20%{opacity: 1;}
+				80%{opacity: 1;}
+				100%{background-position: 0 0; opacity: 0;}}
+
+		.rain{width: 2px; height: 50px; position: absolute; background: white;
+			animation: rr 1s infinite ease-in;}
+		.rain:hover{height: 400px;}
+
+		@keyframes rr{from{bottom: 800px;} to{bottom: 0px;}}
+
+	</style>
+</head>
+<body>
+	<div class="aaa">
+		<img src="halloween.gif" class="mmm">
+		<div class="rain" id="rrr"></div>
+		<img src="pumpkin5.gif" class="aai">
+		<img src="pumpkin6.gif" class="bbi">
+		<img src="pumpkin3.gif" class="cci">
+	</div>
+
+	<audio id="mysound">
+		<source src="halloween.mp3" type="audio/mp3">
+	</audio>
+
+	<script type="text/javascript">
+		setInterval(attachPumpkin,1000);
+
+		function attachPumpkin(){
+			var t = document.createElement("div");
+			t.setAttribute("class","pumpkin");
+			t.style.position = "absolute";
+
+			t.style.background = "url('pumpkin.gif') no-repeat";
+			t.style.backgroundSize = "100% auto";
+			t.style.top = randomBH(0,window.innerHeight) + "px";
+			t.style.left = randomBH(0,window.innerWidth) + "px";
+			t.addEventListener("animationend",remove);
+
+			t.onclick = function(){
+				t.style.background = "url(pumpkin1.gif)";
+				mysound.play();
+			}
+			document.body.appendChild(t);
+		}
+
+		function remove(){
+			var t = event.target;
+			t.parentNode.removeChild(t);
+		}
+
+		function randomBH(min, max){
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random()*(max-min+1))+min;
+		}
+
+		for(var i=0; i<50; i++){
+			var b = rrr.cloneNode(true);
+			b.id = i;
+			b.className = "rain";
+			b.style.left = Math.random()*window.innerWidth + "px";
+			b.style.height = Math.random()*50 + "px";
+			b.style.animationDuration = Math.random()*2 + "s";
+			b.style.background = "white";
+
+			document.body.appendChild(b);
+		}
+	</script>
+</body>
+</html>
