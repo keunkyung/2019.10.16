@@ -18,7 +18,13 @@
 				20%{opacity: 1;}
 				80%{opacity: 1;}
 				100%{background-position: 0 0; opacity: 0;}}
+		.ghost{width: 200px; height: 200px; background-repeat: no-repeat; animation: qq 8s linear;}
 
+			@keyframes qq{
+				0%{background-position: 0 300px; opacity: 0;}
+				20%{opacity: 1;}
+				80%{opacity: 1;}
+				100%{background-position: 0 0; opacity: 0;}}
 		.rain{width: 2px; height: 50px; position: absolute; background: white;
 			animation: rr 1s infinite ease-in;}
 		.rain:hover{height: 400px;}
@@ -84,6 +90,22 @@
 			b.style.background = "white";
 
 			document.body.appendChild(b);
+		}
+
+		setInterval(attachGhost,1000);
+
+		function attachGhost(){
+			var c = document.createElement("div");
+			c.setAttribute("class","ghost");
+			c.style.position = "absolute";
+
+			c.style.background = "url('ghost.gif') no-repeat";
+			c.style.backgroundSize = "100% auto";
+			c.style.bottom = randomBH(0,window.innerHeight) + "px";
+			c.style.left = randomBH(0,window.innerWidth) + "px";
+			c.addEventListener("animationend",remove);
+
+			document.body.appendChild(c);
 		}
 	</script>
 </body>
